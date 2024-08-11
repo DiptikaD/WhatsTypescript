@@ -1,10 +1,10 @@
-// import './style.css';
+import './style.css';
 
 import { Response } from "undici-types";
 
 
 const form: HTMLFormElement = document.querySelector('#defineform');
-
+const itemList = document.getElementById('idkidk') as HTMLUListElement;
 
 form.onsubmit = () => {
   const formData = new FormData(form);
@@ -19,10 +19,10 @@ form.onsubmit = () => {
 };
 
 function getURL(text: String){
-  const headers: Headers = new Headers()
+  const headers: Headers = new Headers();
 
-  headers.set('Content-Type', 'application/json')
-  headers.set('Accept', 'application/json')
+  headers.set('Content-Type', 'application/json');
+  headers.set('Accept', 'application/json');
 
   const request: RequestInfo = new Request('https://api.dictionaryapi.dev/api/v2/entries/en/'+text, {
     method: 'GET',
@@ -31,6 +31,8 @@ function getURL(text: String){
   
   var response = fetch(request).then(res => res.json());
   console.log(response);
+  const idkidk = document.createElement('idk');
+  itemList.appendChild(idkidk);
   return response;
 }
 
