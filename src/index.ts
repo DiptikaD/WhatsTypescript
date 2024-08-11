@@ -1,10 +1,10 @@
 import './style.css';
 
-import { Response } from "undici-types";
+import axios from 'axios';
 
 
 const form: HTMLFormElement = document.querySelector('#defineform');
-const itemList = document.getElementById('idkidk') as HTMLUListElement;
+const content= document.getElementById('title') as HTMLHeadingElement;
 
 form.onsubmit = () => {
   const formData = new FormData(form);
@@ -12,27 +12,23 @@ form.onsubmit = () => {
   console.log(formData);
   const text = formData.get('defineword') as string;
   console.log(text);
-  var test = getURL(text);
-  console.log(test)
-  console.log("hello mango");
+  const test =  getURL(text).then(response => {
+    const paragraph = document.getElementById('lead');
+    paragraph!.textContent = JSON.stringify(response.data[0].meanings[0].definitions[0].definition, null, 2);
+  });
   return false; // prevent reload
 };
 
-function getURL(text: String){
-  const headers: Headers = new Headers();
+function getURL(text: string){
+  return axios.get(`http://api.dictionaryapi.dev/api/v2/entries/en/${text}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  });
+}
 
-  headers.set('Content-Type', 'application/json');
-  headers.set('Accept', 'application/json');
+function updateContent(){
 
-  const request: RequestInfo = new Request('https://api.dictionaryapi.dev/api/v2/entries/en/'+text, {
-    method: 'GET',
-    headers: headers
-  })
-  
-  var response = fetch(request).then(res => res.json());
-  console.log(response);
-  const idkidk = document.createElement('idk');
-  itemList.appendChild(idkidk);
-  return response;
 }
 

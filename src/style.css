@@ -1,4 +1,7 @@
-.list-unstyled{
+.lead{
     background-color: #a74ca7 !important;
+    color: #0cc327;
+    font-size: larger;
+    font-style: italic;
     
 }
