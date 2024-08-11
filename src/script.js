@@ -4,11 +4,11 @@ form.style.position = 'absolute';
 form.style.zIndex = '1000';
 
 // Initial position and speed
-let currentX = 0;
+let currentX = 1080;
 let currentY = 0;
-let targetX = 0;
+let targetX = 1080;
 let targetY = 0;
-const speed = 0.039; // Adjust this value for speed of movement
+const speed = 0.099; // Adjust this value for speed of movement
 
 function moveFormAwayFromCursor(event) {
   const mouseX = event.clientX;
