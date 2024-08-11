@@ -13,8 +13,13 @@ form.onsubmit = () => {
   const text = formData.get('defineword') as string;
   console.log(text);
   const test =  getURL(text).then(response => {
-    const paragraph = document.getElementById('lead');
-    paragraph!.textContent = JSON.stringify(response.data[0].meanings[0].definitions[0].definition, null, 2);
+    const definition = document.getElementById('lead');
+    definition!.textContent = JSON.stringify(response.data[0].meanings[0].definitions[0].definition, null, 2);
+    const example = document.getElementById('example');
+    example!.textContent = JSON.stringify(response.data[0].meanings[0].definitions[1].definition, null, 2);
+    const example2 = document.getElementById('example2');
+    example2!.textContent = JSON.stringify(response.data[0].meanings[0].definitions[2].definition, null, 2);
+   
   });
   return false; // prevent reload
 };
